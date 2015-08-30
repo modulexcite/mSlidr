@@ -55,22 +55,27 @@ define(["./ComponentView", "common/Math2"], function(ComponentView, Math2) {
 
 		manualMoveScale: function(e) {
 			return this.model.setFloat("impScale", e.target.value);
+			this.model.save(); 
 		},
 
 		manualMoveZ: function(e) {
 			return this.model.setInt("z", e.target.value);
+			this.model.save();
 		},
 
 		manualRotX: function(e) {
 			return this.model.setFloat("rotateX", Math2.toRads(e.target.value));
+			this.model.save();
 		},
 
 		manualRotY: function(e) {
 			return this.model.setFloat("rotateY", Math2.toRads(e.target.value));
+			this.model.save();
 		},
 
 		manualRotZ: function(e) {
 			return this.model.setFloat("rotateZ", Math2.toRads(e.target.value));
+			this.model.save();
 		},
 
 		rotateXStart: function(e, deltas) {
@@ -83,6 +88,7 @@ define(["./ComponentView", "common/Math2"], function(ComponentView, Math2) {
 			var rot;
 			rot = (deltas.dy * .02) % twoPI;
 			return this.model.setFloat("rotateX", this._initialRotX + rot);
+			this.model.save();
 		},
 
 		_rotXChanged: function(model, value) {
@@ -100,6 +106,7 @@ define(["./ComponentView", "common/Math2"], function(ComponentView, Math2) {
 			var rot;
 			rot = (deltas.dx * .02) % twoPI;
 			return this.model.setFloat("rotateY", this._initialRotY + rot);
+			this.model.save();
 		},
 
 		_rotYChanged: function(model, value) {
@@ -117,6 +124,7 @@ define(["./ComponentView", "common/Math2"], function(ComponentView, Math2) {
 			var rot;
 			rot = this._calcRot(deltas);
 			return this.model.setFloat("rotateZ", this._initialRotZ + rot - this._rotZOffset);
+			this.model.save();
 		},
 
 		_rotZChanged: function(model, value) {

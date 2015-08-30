@@ -73,6 +73,7 @@ define(["./ComponentView", './Mixers'],
 							width: width,
 							height: height
 						});
+						this.model.save();
 					}
 				} else {
 					this.origSize = {

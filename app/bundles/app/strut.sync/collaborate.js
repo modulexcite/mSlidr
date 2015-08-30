@@ -42,11 +42,10 @@ function(socketio,_,Backbone) {
 		}
 
 		this.connect= function(url){
-			debugger; 
+
 			this.socket = socketio.connect(window.location.href + (url || "")); 
 			window.socket = this.socket; 
-			window.socket.on('slide:create', function(res){
-				debugger;
+			window.socket.on('text:create', function(res){
 				if(res && res.success){
 					var objectId = res.data.__uid; 
 					if(singlton.space[objectId]){ // object exists. 
@@ -54,6 +53,44 @@ function(socketio,_,Backbone) {
 					}
 					else{
 						//new object created. notifiy who is interested.
+						singlton.watcher.trigger('text:create',res.data); 
+					}
+				}
+			});
+
+			window.socket.on('text:update', function(res){
+				if(res && res.success){
+					var objectId = res.data.__uid; 
+					if(singlton.space[objectId]){ // object exists. 
+						var objRef = singlton.space[objectId]; 
+						objRef.set('id',res.data.id) ; 
+						objRef.set(singlton.getAttrs(res.data, objRef), {silence:true}); 
+
+					}
+				}
+			});
+
+			window.socket.on('text:delete', function(res){
+				if(res && res.success){
+					var objectId = res.data.__uid;
+					if(singlton.space[objectId]){ // object exists. 
+						singlton.watcher.trigger('text:delete', singlton.space[objectId])
+						delete singlton.space[objectId]; 
+					}
+				}
+			});
+
+
+			window.socket.on('slide:create', function(res){
+
+				if(res && res.success){
+					var objectId = res.data.__uid; 
+					if(singlton.space[objectId]){ // object exists. 
+						singlton.space[objectId].set('id',res.data.id) ; 
+					}
+					else{
+						//new object created. notifiy who is interested.
+						res.data.selected = false; // disable selected!!
 						singlton.watcher.trigger('slide:create',res.data); 
 					}
 				}
@@ -70,6 +107,11 @@ function(socketio,_,Backbone) {
 				}
         	});
 
+		}
+
+		this.getAttrs = function(obj, spaceObj){
+			obj.selected = spaceObj.get('selected')
+			return obj;
 		}
 
 		this._getGUID = function(){

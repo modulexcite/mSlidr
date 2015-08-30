@@ -101,6 +101,7 @@ function(ComponentView, Mixers, ManagedColorChooser) {
 
 		_updateFill: function(color) {
 			this.model.set('fill', color.toHexString());
+			this.model.save();
 		}
 	});
 });

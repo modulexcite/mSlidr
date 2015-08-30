@@ -15,6 +15,7 @@ function(Backbone, Header, CustomBgStylesheet) {
 		render: function() {
 			this.$el.empty();
 			this.$el.append(this._header.render().$el);
+			this.$el.append()
 			var activeMode = this.model.get('activeMode');
 			if (activeMode)
 				this.$el.append(activeMode.view.render().$el);

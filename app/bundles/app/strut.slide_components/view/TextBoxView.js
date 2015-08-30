@@ -74,6 +74,7 @@ define(["./ComponentView", "libs/etch",
 				sign = deltas.dx - this._lastDx > 0 ? 1 : -1;
 				this.model.set("size", currSize + Math.round(sign * Math.sqrt(Math.abs(deltas.dx - this._lastDx))));
 				return this._lastDx = deltas.dx;
+
 			},
 
 			/**
@@ -199,6 +200,7 @@ define(["./ComponentView", "libs/etch",
 					this.$textEl.attr("contenteditable", false);
 					this.$el.removeClass("editable");
 					this.allowDragging = true;
+					this.model.save();
 				}
 			},
 

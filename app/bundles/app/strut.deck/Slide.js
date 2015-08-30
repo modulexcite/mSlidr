@@ -204,6 +204,7 @@ define(["libs/backbone",
 			 * @param {Component|Component[]} components The components to be added (text box, image, video, etc.)
 			 */
 			add: function(components) {
+				var self = this; 
 				components = _.isArray(components) ? components.slice() : [components];
 				components.forEach(function(component) {
 					this._placeComponent(component);
@@ -228,7 +229,7 @@ define(["libs/backbone",
 					this.trigger("contentsChanged");
 					this.trigger("change:components.add", this, component);
 				}, this);
-				this.selectComponents(components);
+				//this.selectComponents(components);
 			},
 
 			/**
@@ -239,6 +240,7 @@ define(["libs/backbone",
 			 * @private
 			 */
 			_placeComponent: function(component) {
+
 				return this.get('components').forEach(function(existingComponent) {
 					var existingX, existingY;
 					existingX = existingComponent.get("x");
@@ -280,6 +282,7 @@ define(["libs/backbone",
 						this._selectionChanged(component, false);
 						component.trigger("unrender");
 						component.off();
+						component.dispose();
 						return component;
 					} else {
 						return undefined;

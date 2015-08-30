@@ -370,7 +370,8 @@ define(["common/Calcium",
 
 			insert:function(slideAtts){
 				//insert slide model into the deck. 
-				this.get('slides').add(new Slide(slideAtts)); 
+				debugger;
+				this.get('slides').add(new Slide(slideAtts),{at: 0}); 
 			},
 
 			deleteSlide:function(slide){

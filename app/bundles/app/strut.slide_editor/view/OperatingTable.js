@@ -13,7 +13,7 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 	'use strict';
 
 	return Backbone.View.extend({
-		className: 'operatingTable strut-surface',
+		className: 'operatingTable strut-surface col-sm-10',
 		events: {
 			"click": "_clicked",
 			"focused": "_focus",
@@ -45,6 +45,7 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 		},
 
 		render: function() {
+			debugger;
 			this._$slideContainer = $('<div class="slideContainer"></div>')
 			this.$el.html(this._$slideContainer);
 			this._$slideContainer.css(config.slide.size);

@@ -499,6 +499,8 @@ define(["libs/backbone",
 				}
 				newRot = newRot % (2 * Math.PI);
 				this.model.setFloat("rotate", newRot);
+
+				
 			},
 
 			/**
@@ -507,6 +509,7 @@ define(["libs/backbone",
 			rotateStop: function() {
 				var cmd = new ComponentCommands.Rotate(this._initialRotate, this.model);
 				undoHistory.push(cmd);
+				this.model.save();
 			},
 
 			// TODO fix or remove commented code and unused variables
@@ -581,6 +584,7 @@ define(["libs/backbone",
 			scaleStop: function() {
 				var cmd = new ComponentCommands.Scale(this._initialScale, this.model);
 				undoHistory.push(cmd);
+				
 			},
 
 			/**

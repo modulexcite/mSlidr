@@ -25,6 +25,16 @@ define(["./SpatialObject"], function(SpatialObject) {
 		 * Initialize component model.
 		 * @returns {Object}
 		 */
+
+		/*
+		// 
+		
+		set : function(attributes, options) {
+		    SpatialObject.prototype.set.call(this, attributes, options);
+		    if(this.options && options.silence  !== true)
+		       this.save();
+		},
+		*/ 
 		
 		initialize: function() {
 			_.defaults(this.attributes, defaults);
@@ -54,6 +64,7 @@ define(["./SpatialObject"], function(SpatialObject) {
 		dispose: function() {
 			this.trigger("dispose", this);
 			this.off();
+			SpatialObject.prototype.dispose.apply(this, arguments);
 		},
 
 		constructor: function Component() {

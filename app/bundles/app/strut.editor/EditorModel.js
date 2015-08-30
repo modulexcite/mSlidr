@@ -55,7 +55,10 @@ define(['libs/backbone',
 				GlobalEvents.on('undo', this._cmdList.undo, this._cmdList);
 				GlobalEvents.on('redo', this._cmdList.redo, this._cmdList);
 				live.subscribe('slide:create',this.insertSlide,this); 
-				live.subscribe('slide:delete',this.removeSlide,this); 
+				live.subscribe('slide:delete',this.removeSlide,this);
+				live.subscribe('text:create',this.insertComponent,this); 
+				live.subscribe('text:delete',this.deleteComponent,this); 
+				live.subscribe('text:update',this.updateComponent,this); 
 				Backbone.on('etch:state', this._fontStateChanged, this);
 			},
 
@@ -168,11 +171,40 @@ define(['libs/backbone',
 				return this._deck.get('slides').indexOf(this._deck.get('activeSlide'));
 			},
 
+			insertComponent:function(component){
+				debugger;
+				var slideId = component.slideId; 
+				var slide = this.slides().get(slideId); 
+				//here we should create the componenet in slient. and add it to the slide. 
+				if (slide) {
+					var comp = ComponentFactory.instance.createModel(component.type, {
+						fontStyles: component.fontStyles
+					},
+					component
+					);
+					slide.add(comp);
+				}
+
+			},
+			deleteComponent:function(component){
+				debugger;
+				var slideId = component.get('slideId'); 
+				var slide = this.slides().get(slideId); 
+				slide.remove(component); 
+			}, 
+
+			updateComponent:function(component){
+				
+			}, 
 			addComponent: function(type) {
 				var slide = this._deck.get('activeSlide');
+				debugger;
 				if (slide) {
 					var comp = ComponentFactory.instance.createModel(type, {
 						fontStyles: this._fontState
+					},
+					{
+						slideId:slide.get('id')
 					});
 					slide.add(comp);
 				}

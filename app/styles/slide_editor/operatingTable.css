@@ -6,10 +6,10 @@
   font-family: "Lato", sans-serif;
   position: absolute;
   left: 150px;
+  right: 150px;
   z-index: 1;
   top: 56px;
   bottom: 0px;
-  right: 0px;
 }
 
 .operatingTable .slideContainer {

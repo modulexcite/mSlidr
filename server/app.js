@@ -18,22 +18,36 @@ exports.start = function(server,connect,options){
             //TODO: add it to server side
     		console.log('slide created');
     		slide.id = counter++;
-    	 	socket.broadcast.emit('slide:create',{success:true, data:slide});
-        })
+    	 	nsp.emit('slide:create',{success:true, data:slide});
+        });
 
         socket.on('slide:delete',function(slide){ 
             console.log('slide deleted');
             //TODO
             //remove it from server side too
-            socket.broadcast.emit('slide:delete',{success:true, data:slide});
-        })
+            nsp.emit('slide:delete',{success:true, data:slide});
+        });
 
         
 
         socket.on('text:create',function(text){ 
         	console.log('text created');
         	text.id = counter++;
-    	 	socket.broadcast.emit('text:create',{success:true, data:text});
-        })
+    	 	nsp.emit('text:create',{success:true, data:text});
+        });
+
+        socket.on('text:delete',function(text){ 
+            console.log('text deleted');
+            text.id = counter++;
+            nsp.emit('text:delete',{success:true, data:text});
+        });
+
+        socket.on('text:update',function(text){ 
+            console.log('text updated');
+            text.id = counter++;
+            nsp.emit('text:update',{success:true, data:text});
+        });
+
+
      });
 }

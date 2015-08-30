@@ -1,0 +1,196 @@
+.messanger {
+	width: 149px;
+	position: absolute;
+	right: 0px;
+	top: 56px;
+	bottom: 0px;
+	padding-bottom: 45px;
+	background-image: url('img/linen-gray.png');
+	z-index:2;
+}
+
+
+#user {
+    color: #AAAAAA;
+    float: right;
+    font-family: arial;
+    font-size: 13px;
+    margin: 5px 30px 0 0;
+}
+
+
+
+
+
+
+
+
+
+
+.rightFloater {
+    float: right;
+}
+
+
+
+.profilePic {
+    width: 50px;
+    height: 50px;
+}
+
+
+
+
+#rightQuote {
+    clear:both;
+}
+
+
+
+#userInfo .profileDetails {
+    min-height: 50px;
+    color: #8a9ab1;
+    text-align:center;
+}
+#userInfo .profileLink {
+    color: #1886DB;
+}
+#userInfo .profilePic {
+    margin-left: 20px;
+}
+#userInfo h6 {
+   font-size: 9px;
+}
+#userInfo .loginSource {
+    font-size: 11px;
+}
+#logoutLink  {
+    color: #8A9AB1;
+    padding-left:4px;
+}
+
+
+
+
+#loginRightContent {
+    background-color: #464d57;
+    display:none;
+}
+
+#loginRightContent h3 {
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 40px;
+    color: #d3dae5;
+    padding-left: 10px;
+
+}
+
+#rightContentButton {
+    margin: 0;
+}
+
+
+.m-submenu-list.share-feature {
+    width: 340px;
+    top: -100px;
+    color: #666666 !important;
+    text-align: center;
+    padding: 10px;
+
+}
+.share-feature input {
+    display: inline-block;
+}
+.pull-left{
+    float:left;
+}
+.pull-right {
+    float: right;
+}
+
+
+#rightHeaderContent {
+    padding-top: 10px;
+}
+#rightHeaderButton {
+    margin: 0;
+}
+
+
+#loginRightContent .whiteboardList {
+    min-height: 250px;
+}
+
+.whiteboardList li {
+  list-style: none;
+}
+
+#loginRightContent h3.dashboardRightContentHeading {
+    margin-left: 20px;
+    padding-right: 10px;
+}
+
+
+.sharedBoardHide {
+    display : none;
+}
+.controls{
+    height: 3em;
+}
+
+
+
+
+/************** Right Hand Side Menu Actions -- START -- ****************/
+.rightdiv {width:52px;float:right;height:100%;}
+.rightdiv .top{position:absolute;top:0px;background-color: #CEE1EC;padding-bottom: 90px;height: 80%; width:50px;}
+.rightdiv .bottom{position:absolute;bottom:0px;width:52px;display:block;max-height:100%;background:#69A3C7;}
+.rightdiv .bottom a,.rightdiv .bottom a:link,.rightdiv .bottom a:visited,.rightdiv .bottom a:hover,.rightdiv .bottom a:active{
+	color:#B8C2CB;text-decoration:none;
+}
+.user-image{background:url('../images/userprofile_bg.png') no-repeat;width:42px; height:53px;margin:8px 5px;}
+.board-name{-moz-transform:rotate(90deg);-moz-transform-origin: right;-webkit-transform: rotate(90deg);-webkit-transform-origin-x: right;font-size: 22px; color:#E3E6E9;letter-spacing:1px;width:auto;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;height: 26px; background-color: #CEE1EC; position:absolute; top:30px; right:27px}
+.thumbnailText .success{color:#10B832;}
+.thumbnailText .error{color:red;}
+.menu-holder{border-top: 1px groove #0E1215;width:52px;text-align:center;padding:3px 0;cursor:pointer;color:#B8C2CB;position:relative;}
+.menu-holder:hover{background-color:#036bd5;border-top: 1px groove #000000;color:#FFFFFF;}
+.m-label{font-size:11px;}
+.m-selected{background-color:#036bd5;}
+.m-icon{background:url('../images/white_menu_24.png') no-repeat;width:28px;height:28px;background-position:0 0;margin:3px auto 0;}
+.m-save{background-position:0 0;}
+.m-edit{background-position:0 -54px;}
+.m-view{background-position:0 -106px;}
+.m-share{background-position:0 -162px;}
+.m-discuss{background-position:0 -218px;}
+.m-report{background-position:0 -268px;}
+.m-help{background-position:0 -324px;}
+.m-friends{background-position:0 -364px;}
+.m-submenu-list { overflow:hidden; display: none;box-shadow: 0 0 5px #888888; -moz-box-shadow: 0 0 5px #888888; -webkit-box-shadow: 0 0 5px #888888; background-color: #FFFFFF; border-radius: 4px 4px 4px 4px; height: auto; position: absolute; right: 58px; top: -3px; width: 148px; z-index: 1035;}
+.menu-arrow{display: block; left: 148px; position: relative; top: 21px; width: 18px; border-bottom: 10px solid transparent; border-top: 10px solid transparent; border-left: 10px solid #ffffff;}
+.menu-list {list-style: none; margin-top: -13px; color: #666666; text-align:left;}
+.menu-list li{padding:3px; margin: 0 15px 0 -10px; font-weight: bold; position:relative }
+.menu-list li:not(:last-child) {border-bottom: 1px solid #CCCCCC;}
+.menu-list li.disabled {color: #bbb;}
+.menu-shortcut{position:absolute; right:2px;color: #CCCCCC; font-weight: normal;}
+#chatdialog ul { list-style: none; margin-left: 0px; height:10em; overflow: auto; border: 1px solid lightblue; padding: 5px; }
+/************** Right Hand Side Menu Actions -- End -- ****************/
+
+
+
+/************** Overloading Dialog Styles  -- Start -- ****************/
+.ui-widget-header{background:#046Ad6;border-radius:5px 5px 0 0;}
+.ui-dialog{padding:0px !important;box-shadow:1px 1px 1px #000000}
+.ui-widget-content{border-width:0px !important;background:#F7F7F9;}
+.ui-dialog-content{border:1px solid #EEEEEE !important;}
+.ui-dialog .ui-dialog-titlebar{padding: 0.1em 0.4em;}
+/************** Overloading Dialog Styles  -- End -- ****************/
+.json-export {height:65%; width:90%}
+
+.thumbnailCaption.editable {
+    background-image:url('../images/icon-pencil.png');
+    background-repeat:no-repeat;
+    padding:0 0 0 15px;
+}
+
+

@@ -7,13 +7,30 @@
 	-In Client side we should has silence Update. which mean update without out sync. 
 	-
 */
+var randomString = require('randomstring'); 
 var counter = 0;// this is will be replaces with mongoose  
+var prefix = 'Guest_'; 
 
+function getNewGuestName(){
+    return prefix+ randomString.generate(5); 
+}
 exports.start = function(server,connect,options){
 	 var io = require('socket.io').listen(server);
 	 var nsp = io.of('/mslider')
      nsp.on('connection', function(socket) {
-    	console.log('new connection'); 
+        
+        var guestName = getNewGuestName(); 
+    	socket.username = guestName; 
+        socket.emit('user:yourname', guestName); 
+
+        socket.broadcast.emit('user:join', {name:guestName}); 
+        socket.on('user:message',function(message){ 
+            //TODO: add it to server side
+            console.log('new message from ' , socket.username , message);
+            socket.broadcast.emit('user:message',{success:true, data:{username:socket.username, text:message, createdAt:new Date()}});
+        });
+
+
     	socket.on('slide:create',function(slide){ 
             //TODO: add it to server side
     		console.log('slide created');
@@ -21,6 +38,7 @@ exports.start = function(server,connect,options){
     	 	nsp.emit('slide:create',{success:true, data:slide});
         });
 
+     
         socket.on('slide:delete',function(slide){ 
             console.log('slide deleted');
             //TODO

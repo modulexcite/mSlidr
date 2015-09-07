@@ -4,9 +4,11 @@ require.config({
 		preview_export: "../preview_export",
 
     	jquery: "../scripts/libs/jQuery",
+    	moment:"../scripts/libs/moment",
 		jqueryui: "../scripts/libs/jquery-ui",
 		touchpunch: "../scripts/libs/jquery-ui-touch-punch",
 		"jquery.multisortable": "../scripts/libs/jquery.multisortable",
+		"jquery.slimscroll": "../scripts/libs/jquery.slimscroll.min",
     	position: "../components/jq-contextmenu/jquery.ui.position",
     	jqContextMenu: "../components/jq-contextmenu/jquery.contextMenu",
     	lodash: "../scripts/libs/lodash",
@@ -34,6 +36,7 @@ require.config({
     	'strut/exporter': '../bundles/app/strut.exporter',
     	'strut/exporter/json': '../bundles/app/strut.exporter.json',
     	'strut/header': '../bundles/app/strut.header',
+    	'strut/collaboration': '../bundles/app/strut.collaboration',
     	'strut/messaging': '../bundles/app/strut.messaging',
     	'strut/importer': '../bundles/app/strut.importer',
     	'strut/importer/json': '../bundles/app/strut.importer.json',
@@ -51,7 +54,7 @@ require.config({
 
     	'tantaman/web': '../bundles/common/tantaman.web',
 		'tantaman/web/local_storage': '../bundles/common/tantaman.web.local_storage',
-		'tantaman/web/remote_storage': '../bundles/common/tantaman.web.remote_storage',
+		//'tantaman/web/remote_storage': '../bundles/common/tantaman.web.remote_storage',
 		'tantaman/web/saver': '../bundles/common/tantaman.web.saver',
 		'tantaman/web/storage': '../bundles/common/tantaman.web.storage',
 		'tantaman/web/undo_support': '../bundles/common/tantaman.web.undo_support',
@@ -70,6 +73,9 @@ require.config({
 		bootstrap: {
 			deps: ["jquery"]
 		},
+		'moment': {
+      		deps:[]
+    	},
 
 		"jquery.multisortable": {
 			deps: ["jquery", "jqueryui"]

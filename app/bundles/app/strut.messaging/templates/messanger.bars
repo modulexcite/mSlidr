@@ -1,127 +1,22 @@
 <div class="rightdiv">
-    <div class="top">
-      <!--<div class="user-image" id="userProfilePic"></div>-->
-      <div id="boardName" class="board-name" style="position: relative; overflow: visible; top: 190px;">mm</div>
-    </div>
+    <div class="small-chat-box fadeInRight animated active">
 
-    <div class="bottom">
-
-                  <div id="friendsicon" class="menu-holder m-popover">
-                    <div class="m-icon m-friends"></div>
-                    <div class="m-label">Friends...</div>
-                    <div class="m-submenu-list all" style="display: none;">
-                        <div>
-                            <label id="myUserName">
-                                My Name:
-                                <input type="text">
-                            </label>
-                        </div>
-
-                        <span class="menu-arrow"></span>
-                      <ul class="menu-list">
-                        <li><em>Home alone!</em></li>
-                      </ul>
-                    </div>
-                    <div class="m-submenu-list notify">
-                      <span class="menu-arrow"></span>
-                      <ul class="menu-list"></ul>
-                    </div>
-                  </div>
-
-
-      <div class="menu-holder m-popover" data-action="showImage" id="showImageIcon">
-        <div class="m-icon m-save"></div>
-        <div class="m-label">Show Image</div>
-        <div class="m-submenu-list">
-              <span class="menu-arrow"></span>
-              <ul class="menu-list">
-                <li title="Show Raw Image" id="Raw">Raw</li>
-                <li title="Clip to Conatiner" id="Clip">Clip</li>
-              </ul>
-             </div>
-      </div>
-      <div class="menu-holder m-popover" data-action="showImage" id="showCanvas">
-        <div class="m-icon m-save"></div>
-        <div class="m-label">Canvas</div>
-        <div class="m-submenu-list" style="display: none;">
-              <span class="menu-arrow"></span>
-              <ul class="menu-list">
-                <li><a href="/api/json?name=/boards/mm" id="save-canvas" download=""> Save Canvas </a></li>
-                <li>
-                  <form id="photo" enctype="multipart/form-data" action="/api/json" method="post">
-                    <input type="file" name="canvas" id="fileDialog" style="display:none" accept=".json">
-                    <label id="save-file-canvas"><a> Load Canvas </a></label>
-                    <!-- <input type="file" name="userPhoto" /> -->
-                    <input id="loadCanvasSubmit" hidden="" type="submit">
-                  </form>
-                </li>
-              </ul>
-              </div>
-      </div>
-      <!-- <div class="menu-holder m-popover">
-        <div class="m-icon m-save"></div>
-        <div>
-          <a href="/api/json" download> Save Canvas </a>
+        <div class="heading" draggable="true">
+            <small class="chat-date pull-right">
+                <a href="#"><i id="btn-close" class="icon-remove"></i></a>
+            </small>
+            {{username}}
         </div>
-      </div> -->
-      <div class="menu-holder m-popover" id="editicon" data-action="edit" data-content="Edit..." title="Edit">
-        <div class="m-icon m-edit"></div>
-        <div class="m-label">Edit ...</div>
-        <div class="m-submenu-list" style="display: none;">
-              <span class="menu-arrow"></span>
-              <ul class="menu-list">
-                <li title="Undo" id="Undo" class="disabled">Undo<span class="menu-shortcut">Ctrl+z</span></li>
-                <li title="Redo" id="Redo" class="disabled">Redo<span class="menu-shortcut">Ctrl+y</span></li>
-              </ul>
-             </div>
-      </div>
-      <div class="menu-holder m-popover" id="shareicon" data-action="share" data-content="Share..." title="Share">
-        <div class="m-icon m-share"></div>
-        <div class="m-label">Share ...</div>
-        <div class="m-submenu-list share-feature">
-                <!--<span class="menu-arrow"></span>-->
-                    <div>
-                        <h2>Share this board:</h2>
-                        <label class="clearfix">
-                            <span class="pull-left share-label">Link:</span>
-                            <input id="share-link" class="pull-right" type="text" value="" "="">
-                        </label>
-                    </div>
-                    <br>
-                    <div>
-                        <label class="clearfix share-label">
-                            <span class="pull-left">Embed URL:</span>
-                            <input id="embed-url" class="pull-right" type="text" value="">
-                        </label>
-                    </div>
-             </div>
-      </div>
-      <div id="discussicon" class="menu-holder" data-action="discuss">
-        <div class="m-icon m-discuss"></div>
-        <div class="m-label">Chat</div>
-                                <div class="m-submenu-list dummy"></div>
-                                <div class="m-submenu-list notify">
-                                  <span class="menu-arrow"></span>
-                                  <ul class="menu-list"></ul>
-                                </div>
-      </div>
-      <div class="menu-holder" data-action="report" id="reporticon">
-        <div class="m-icon m-report"></div>
-        <div class="m-label">Report ...</div>
-        <div class="m-submenu-list">
-            <span class="menu-arrow"></span>
-            <ul class="menu-list">
-              <li title="LogIssue" id="LogIssue"><a href="http://github.com/Imaginea/mdraw/issues" target="_blank" style="color:#666666">Log Issue</a></li>
-              <li title="ExportJson" id="ExportJson">Export</li>
-            </ul>
+
+        <div id="content-container" style="overflow-y:scroll;overflow-x:hidden; height:250px;">
+            <div class="content" style="overflow-x: hidden; width: auto;">
             </div>
-      </div>
-      <!--<div class="menu-holder" data-action='help'>-->
-        <!--<a href="http://imaginea.github.com/mdraw/latest/help.html" target="_blank">-->
-          <!--<div class="m-icon m-help"></div>-->
-          <!--<div class="m-label">Help</div>-->
-        <!--</a>-->
-      <!--</div>-->
+        </div>
+
+        <div class="form-chat">
+           <input type="text" id="txtMessage" class="form-control">
+        </div>
 
     </div>
-      </div>
+</div>
+

@@ -6,7 +6,8 @@ function() {
 		},
 
 		open: function(storageInterface, model, filename, cb) {
-			storageInterface.savePresentation(
+			if(storageInterface){
+				storageInterface.savePresentation(
 				model.fileName(),
 				model.exportPresentation(model.fileName()),
 				function () {
@@ -20,7 +21,9 @@ function() {
 
 						cb(null, err);
 					});
-				});
+				});	
+			}
+			
 		},
 
 		new_: function(model) {

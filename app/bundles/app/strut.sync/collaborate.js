@@ -41,10 +41,27 @@ function(socketio,_,Backbone) {
 			this.watcher.on(topic,handler,context); 
 		}
 
+		this.sendMessage = function(message){
+			window.socket.emit('user:message', message);
+		}
+
 		this.connect= function(url){
 
 			this.socket = socketio.connect(window.location.href + (url || "")); 
 			window.socket = this.socket; 
+
+			window.socket.on('user:yourname',function(res){
+				singlton.watcher.trigger('user:yourname',res); 
+			}); 
+
+
+			window.socket.on('user:join',function(res){
+				singlton.watcher.trigger('user:join',res); 
+			});
+
+			window.socket.on('user:message',function(res){
+				singlton.watcher.trigger('user:message',res.data); 
+			}); 
 			window.socket.on('text:create', function(res){
 				if(res && res.success){
 					var objectId = res.data.__uid; 

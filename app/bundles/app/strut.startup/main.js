@@ -16,14 +16,17 @@ function(backboneSync,EditorView, EditorModel,live) {
     		if (sessionMeta.lastPresentation != null) {
     			// Load it up.
     			var storageInterface = registry.getBest('strut.StorageInterface');
-    			storageInterface.load(sessionMeta.lastPresentation, function(pres, err) {
-    				if (!err) {
-    					model.importPresentation(pres);
-    				} else {
-    					console.log(err);
-    					console.log(err.stack);
-    				}
-    			});
+    			if(storageInterface){
+	    			storageInterface.load(sessionMeta.lastPresentation, function(pres, err) {
+	    				if (!err) {
+	    					model.importPresentation(pres);
+	    				} else {
+	    					console.log(err);
+	    					console.log(err.stack);
+	    				}
+	    			});		
+	    			}
+    		
     		}
 		}
 	};

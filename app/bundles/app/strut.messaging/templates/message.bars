@@ -1,0 +1,11 @@
+ </div>  <div class="{{ className }}">
+    <div class="author-name">
+        {{ username }}
+    <small class="chat-date">
+       {{ createdAt }}
+    </small>
+    </div>
+    <div class="chat-message active">
+        {{  text }}
+    </div>
+</div>

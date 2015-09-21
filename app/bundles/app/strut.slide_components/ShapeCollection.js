@@ -13,7 +13,7 @@ function() {
 			return new PlatonicShape(name, src, markup, aspect);
 
 		this.name = name;
-		var loc = window.location.href;
+		var loc = window.location.protocol + "//" + window.location.host +'/';
 		var hashIdx = loc.indexOf('#');
 		var finalIdx;
 		if (hashIdx != -1) {

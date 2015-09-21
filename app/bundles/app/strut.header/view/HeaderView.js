@@ -3,7 +3,7 @@ define(['libs/backbone',
 		'strut/presentation_generator/view/PreviewButton',
 		'./ThemeProviderView',
 		'./Tablets',
-		'css!styles/header/header.css'],
+		'css!/styles/header/header.css'],
 function(Backbone, LogoView, PreviewButton, ThemeProviderView, Tablets, empty) {
 	return Backbone.View.extend({
 		className: 'row-fluid header',

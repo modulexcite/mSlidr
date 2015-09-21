@@ -6,7 +6,7 @@
 }
 
 .logo-bg {
-	background-image: url('img/strut-logo-32-light.png');
+	background-image: url('/img/logo.png'); /*img/strut-logo-32-light*/
 	display: inline-block;
 	width: 100px;
 	height: 32px;

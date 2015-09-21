@@ -4,7 +4,7 @@ define(['libs/backbone',
 	'common/Throttler',
 	'./WellContextMenu',
 	'strut/editor/GlobalEvents',
-	'css!styles/slide_editor/slideWell.css',
+	'css!/styles/slide_editor/slideWell.css',
 	"tantaman/web/undo_support/CmdListFactory"],
 	function(Backbone, multisortable, SlideSnapshot, Throttler, WellContextMenu, GlobalEvents, css, CmdListFactory) {
 		'use strict';

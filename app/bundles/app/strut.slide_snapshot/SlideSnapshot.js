@@ -1,6 +1,6 @@
 define(['libs/backbone',
 	'./SlideDrawer',
-	'css!styles/slide_snapshot/slideSnapshot.css',
+	'css!/styles/slide_snapshot/slideSnapshot.css',
 	'strut/deck/Utils',
 	"strut/editor/GlobalEvents"],
 	function(Backbone, SlideDrawer, css, DeckUtils, key) {

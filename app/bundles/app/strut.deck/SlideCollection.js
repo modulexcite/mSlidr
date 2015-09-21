@@ -42,6 +42,7 @@ define(["common/Calcium", "./Slide"],
 				this.models.forEach(function(model, idx) {
 					return model.set("index", idx);
 				});
+				debugger;
 			},
 
 			/**

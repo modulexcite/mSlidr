@@ -1,7 +1,7 @@
 define(['tantaman/web/widgets/CodeEditor',
 		'tantaman/web/widgets/Button',
 		'tantaman/web/css_manip/CssManip',
-		'css!styles/strut.themes/stylesheetEditor.css',
+		'css!/styles/strut.themes/stylesheetEditor.css',
 		'./StylesheetPreProcessor',
 		'codemirror/modes/css'],
 function(CodeEditor, Button, CssManip, empty, preProcessor, cssmode) {

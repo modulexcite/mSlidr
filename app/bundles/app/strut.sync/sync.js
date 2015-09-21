@@ -29,7 +29,6 @@ define(['jquery',
      * Replace the standard sync function with our new, websocket/socket.io based solution.
      */
         Backbone.sync = function(method, model, options){
-            debugger; 
         var opts = _.extend({}, options),
             defer = $.Deferred(),
             promise = defer.promise(),

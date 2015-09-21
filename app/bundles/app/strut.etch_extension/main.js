@@ -1,4 +1,4 @@
-define(['libs/etch', 'css!styles/etch_extension/EtchOverrides.css'],
+define(['libs/etch', 'css!/styles/etch_extension/EtchOverrides.css'],
 function(etch) {
     'use strict';
     _.extend(etch.config.buttonClasses, {

@@ -11,61 +11,140 @@ var randomString = require('randomstring');
 var counter = 0;// this is will be replaces with mongoose  
 var prefix = 'Guest_'; 
 
+//TODO: we need a data structure save the presentation for later use. 
+//for now we will store it in the memory as an object. 
+
+//deck is a list of slides. each slide has components. 
+//and slide id. 
+
+var deck = {    
+    id:'', // room id
+    slides:{
+        //slideid uid will be the property key here. 
+    }  
+}
+
+var decks = {}; 
+
 function getNewGuestName(){
     return prefix+ randomString.generate(5); 
 }
 exports.start = function(server,connect,options){
 	 var io = require('socket.io').listen(server);
-	 var nsp = io.of('/mslider')
-     nsp.on('connection', function(socket) {
+	 setupDynamicRooms(io); 
+}
+
+function addAppListners(nsp,socket,room){
+        var deck = decks[room]; 
         
+        socket.on('deck:load',function(){
+          socket.emit('deck:init',deck); 
+        });
+
+        socket.on('deck:background',function(background){
+          console.log('background update', background);
+          socket.broadcast.to(room).emit('deck:background',background); 
+        })
+
+        socket.on('deck:surface',function(background){
+          console.log('background update', background);
+          socket.broadcast.to(room).emit('deck:surface',background); 
+        })
+
+        console.log('new connection');
         var guestName = getNewGuestName(); 
-    	socket.username = guestName; 
+        socket.username = guestName; 
+        deck.users.push(guestName); 
         socket.emit('user:yourname', guestName); 
 
-        socket.broadcast.emit('user:join', {name:guestName}); 
+
+
+        socket.broadcast.to(room).emit('user:join', {name:guestName}); 
+
         socket.on('user:message',function(message){ 
             //TODO: add it to server side
-            console.log('new message from ' , socket.username , message);
-            socket.broadcast.emit('user:message',{success:true, data:{username:socket.username, text:message, createdAt:new Date()}});
+            socket.broadcast.to(room).emit('user:message',{success:true, data:{username:socket.username, text:message, createdAt:new Date()}});
         });
 
 
-    	socket.on('slide:create',function(slide){ 
+        socket.on('slide:create',function(slide){ 
+            slide.id = counter++;
+            deck.slides[slide.id] = slide; 
+            socket.emit('slide:create',{success:true, data:slide}); 
+            nsp.to(room).emit('slide:create',{success:true, data:slide});
+
+
+            console.log(deck);
+        });
+
+        socket.on('slide:update',function(slide){ 
             //TODO: add it to server side
-    		console.log('slide created');
-    		slide.id = counter++;
-    	 	nsp.emit('slide:create',{success:true, data:slide});
+          
+            console.log('slide update');
+            decks[room].slides[slide.id] =  slide;  
+            nsp.to(room).emit('slide:update',{success:true, data:slide});
         });
 
      
         socket.on('slide:delete',function(slide){ 
-            console.log('slide deleted');
+            
             //TODO
             //remove it from server side too
-            nsp.emit('slide:delete',{success:true, data:slide});
+            delete  decks[room].slides[slide.id]
+            socket.broadcast.to(room).emit('slide:delete',{success:true, data:slide});
         });
 
         
 
-        socket.on('text:create',function(text){ 
-        	console.log('text created');
-        	text.id = counter++;
-    	 	nsp.emit('text:create',{success:true, data:text});
+        socket.on('component:create',function(component){ 
+          
+            component.id = counter++;
+           
+            decks[room].slides[component.slideId].components[component.__uid] = component;  
+            socket.broadcast.to(room).emit('component:create',{success:true, data:component});
         });
 
-        socket.on('text:delete',function(text){ 
-            console.log('text deleted');
-            text.id = counter++;
-            nsp.emit('text:delete',{success:true, data:text});
+        socket.on('component:delete',function(component){ 
+            delete decks[room].slides[component.slideId].components[component.__uid]
+            socket.broadcast.to(room).emit('component:delete',{success:true, data:component});
         });
 
-        socket.on('text:update',function(text){ 
-            console.log('text updated');
-            text.id = counter++;
-            nsp.emit('text:update',{success:true, data:text});
+        socket.on('component:update',function(component){ 
+             decks[room].slides[component.slideId].components[component.__uid] = component; 
+            socket.broadcast.to(room).emit('component:update',{success:true, data:component});
         });
-
-
-     });
 }
+
+function setupDynamicRooms(io){
+    var namespace = io.of('/slider'); 
+
+    var url = require('url');
+
+
+    // global entry point for new connections
+    namespace.on('connection', function (socket) {
+      // extract namespace from connected url query param 'ns'
+      var query = url.parse(socket.handshake.url, true).query;  
+      if(query.room){
+          socket.join(query.room); 
+          if(!decks[query.room]){ 
+             decks[query.room] = {
+                id:query.room,
+                slides:{
+                  
+                },
+                users:[]
+             }
+          }
+          else{
+            //room already exists. we need to send all the deck to the client. 
+            //we will wait client to ask for deck.so it has the chance to init everthing before loading the deck from the server. 
+            //socket.emit('deck:init',decks[query.room]);
+          }
+          
+          addAppListners(namespace,socket,query.room); 
+      }
+    });
+}
+
+

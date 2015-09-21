@@ -19,9 +19,9 @@
     <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
 
     <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <link href='css/web-fonts.css' rel='stylesheet' type='text/css' />
-    <link href='../styles/strut.themes/backgroundClasses.css' rel='stylesheet' type='text/css' />
-    <link href='../styles/strut.themes/surfaceClasses.css' rel='stylesheet' type='text/css' />
+    <link href='/css/web-fonts.css' rel='stylesheet' type='text/css' />
+    <link href='/styles/strut.themes/backgroundClasses.css' rel='stylesheet' type='text/css' />
+    <link href='/styles/strut.themes/surfaceClasses.css' rel='stylesheet' type='text/css' />
     <style>
 .componentContainer {
     position: absolute;
@@ -55,10 +55,10 @@
 }
 </style>
 
-<script src="reveal/lib/js/head.min.js"></script>
-<script src="reveal/js/reveal.js"></script>
-<script src="scripts/onready.js"></script>
-<script src="scripts/loadPresentation.js"></script>
+<script src="/preview_export/reveal/lib/js/head.min.js"></script>
+<script src="/preview_export/reveal/js/reveal.js"></script>
+<script src="/scripts/onready.js"></script>
+<script src="/scripts/loadPresentation.js"></script>
 <script>
 ready(function() {
     if (document.getElementById('launched-placeholder'))
@@ -82,12 +82,12 @@ ready(function() {
 
     // Optional libraries used to extend on reveal.js
     dependencies: [
-      { src: 'reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-      { src: 'reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-      { src: 'reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-      { src: 'reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-      { src: 'reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-      { src: 'reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+      { src: '/preview_export/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: '/preview_export/reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: '/preview_export/reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: '/preview_export/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: '/preview_export/reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: '/preview_export/reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
       // { src: 'preview_export/reveal/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
       // { src: 'preview_export/reveal/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
     ]

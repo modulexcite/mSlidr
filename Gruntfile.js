@@ -7,6 +7,8 @@ var mountFolder = function (connect, dir) {
     return serveStatic(require('path').resolve(dir));
 };
 
+var routes = require('./server/routes.js'); 
+
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -53,7 +55,7 @@ module.exports = function (grunt) {
 
         replace: {
             compile: {
-                src: ['dist/index.html'],
+                src: ['/dist/index.html'],
                 overwrite: true,                 // overwrite matched source files
                 replacements: [{ 
                     from: "window.isOptimized = false;",
@@ -65,7 +67,7 @@ module.exports = function (grunt) {
         watch: {
             handlebars: {
                 files: [
-                    "app/bundles/**/templates/*.bars"
+                    "/app/bundles/**/templates/*.bars"
                 ],
                 tasks: ['handlebars', 'livereload']
             },
@@ -85,16 +87,28 @@ module.exports = function (grunt) {
                 hostname: '*',
                 onCreateServer: function(server, connect, options) {
                    require('./server/app.js').start(server,connect,options)
-                }
+                },
+                middleware: function(connect, options, middlewares) {
+                  // inject a custom middleware into the array of default middlewares
+                  middlewares.unshift(function(req, res, next) {
+                    if (req.url !== '/hello/world') return next();
+
+                    res.end('Hello, world from port #' + options.port + '!');
+                  });
+
+                  return middlewares;
+                },
             },
             
             livereload: {
                 options: {
                     middleware: function (connect) {
                         return [
+                            routes,
                             lrSnippet,
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, 'app'), 
+                            
             
                         ];
                     }
@@ -158,9 +172,9 @@ module.exports = function (grunt) {
                 // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
                     // `name` and `out` is set by grunt-usemin
-                    baseUrl: 'app/scripts',
+                    baseUrl: '/app/scripts',
                     optimize: 'none',
-                    mainConfigFile: 'app/scripts/main.js',
+                    mainConfigFile: '/app/scripts/main.js',
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
                     //generateSourceMaps: true,

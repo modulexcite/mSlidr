@@ -1,8 +1,10 @@
-define(['strut/sync/sync', // include backbone sync lib.
+define([
+'strut/sync/sync', // include backbone sync lib.
 		'strut/editor/EditorView',
         'strut/editor/EditorModel',
          
-        'strut/sync/collaborate'
+        'strut/sync/collaborate',
+        ''
         ],
 function(backboneSync,EditorView, EditorModel,live) {
 	var registry = null;
@@ -13,6 +15,9 @@ function(backboneSync,EditorView, EditorModel,live) {
     		editor.render();
     		$('body').append(editor.$el);
 
+    		/*
+    		//REMOVED: we don't load presentation from session anymore.
+			we don't load presentation from session anymore. instead we will load it from the server side. 
     		if (sessionMeta.lastPresentation != null) {
     			// Load it up.
     			var storageInterface = registry.getBest('strut.StorageInterface');
@@ -27,7 +32,7 @@ function(backboneSync,EditorView, EditorModel,live) {
 	    			});		
 	    			}
     		
-    		}
+    		}*/
 		}
 	};
 
@@ -39,7 +44,8 @@ function(backboneSync,EditorView, EditorModel,live) {
 
 	return {
 		initialize: function(reg) {
-			new live.connect('mslider');
+			var sliderNumber = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+			new live.connect(sliderNumber);
 			registry = reg;
 			
 			registry.register({

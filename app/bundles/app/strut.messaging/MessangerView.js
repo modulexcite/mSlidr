@@ -4,7 +4,7 @@ define(['libs/backbone',
 	'lodash',
 	'jquery.slimscroll',
 	 
-	'css!styles/messanger/messanger.css'],
+	'css!/styles/messanger/messanger.css'],
 function(Backbone,live,moment,_) {
 	return Backbone.View.extend({
 		className: 'messanger',
@@ -45,7 +45,7 @@ function(Backbone,live,moment,_) {
 		}, 
 		changeMyName:function(){
 			var newUserName = this.$('lbl-username').val(); 
-			alert(this.newUserName);
+			
 		}, 
 		onKeyUp:function(e){
 			if(e.which === 13){ // enter key{

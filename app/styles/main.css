@@ -239,4 +239,11 @@ and (max-device-width : 1024px)  {
   }
 }
 
+.header-messager{
+    width: 100%;
+    display: block;
+    font-weight: 100;
+    margin-bottom: 60px;
+}
+
 

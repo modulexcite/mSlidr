@@ -45,6 +45,8 @@ define(["common/Calcium",
 				this.set('background', 'bg-default');
 			},
 
+		 
+
 			/**
 			 * Set an attribute of the Deck.
 			 *
@@ -369,9 +371,8 @@ define(["common/Calcium",
 			},
 
 			insert:function(slideAtts){
-				//insert slide model into the deck. 
-				debugger;
-				this.get('slides').add(new Slide(slideAtts),{at: 0}); 
+
+				this.get('slides').add(new Slide(slideAtts),{at: slideAtts.index || this.get('slides').length}); 
 			},
 
 			deleteSlide:function(slide){
@@ -403,6 +404,7 @@ define(["common/Calcium",
 					var slide = slides[i];
 					slide.on('unrender', slide.unrendered, slide);
 					options.at = _.isNumber(options.at) ? (options.at + i) : (options.preserveIndexes ? slide.get("index") : lastSelectedSlideIndex + 1 + i) || 0;
+					slide.index= options.at; 
 					allSlides.add(slide, options);
 				}
 				this.selectSlides(slides);

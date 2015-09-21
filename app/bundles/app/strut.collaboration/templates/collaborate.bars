@@ -6,6 +6,16 @@
 
     <div class="bottom">
 
+      <div id="profile" class="menu-holder ">
+        <div class="m-edit"></div>
+        <div class="m-label ">Profile</div>
+        <div class="m-submenu-list">
+            <div id="profileContainer" class="profile"></div>
+        </div>
+      </div>    
+
+      
+
         <div id="friendsicon" class="menu-holder m-popover">
             <div class="m-icon m-friends"></div>
             <div class="m-label">Friends...</div>
@@ -64,19 +74,8 @@
           <a href="/api/json" download> Save Canvas </a>
         </div>
       </div> -->
-        <div class="menu-holder m-popover" id="editicon" data-action="edit" data-content="Edit..." title="Edit">
-            <div class="m-icon m-edit"></div>
-            <div class="m-label">Edit ...</div>
-            <div class="m-submenu-list" style="display: none;">
-                <span class="menu-arrow"></span>
-                <ul class="menu-list">
-                    <li title="Undo" id="Undo" class="disabled">Undo<span class="menu-shortcut">Ctrl+z</span></li>
-                    <li title="Redo" id="Redo" class="disabled">Redo<span class="menu-shortcut">Ctrl+y</span></li>
-                </ul>
-            </div>
-        </div>
         <div class="menu-holder m-popover" id="shareicon" data-action="share" data-content="Share..." title="Share">
-            <div class="m-icon m-share"></div>
+            <div class="icon-white icon-share-alt icon-white"></div>
             <div class="m-label">Share ...</div>
             <div class="m-submenu-list share-feature">
                 <!--<span class="menu-arrow"></span>-->

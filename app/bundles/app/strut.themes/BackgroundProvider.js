@@ -2,8 +2,9 @@ define(['tantaman/web/widgets/Dropdown',
 		'strut/deck/Utils',
 		'tantaman/web/widgets/ItemImportModal',
 		'./ColorChooserModal',
+		'strut/sync/collaborate',
 		'lang'],
-function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
+function(View, DeckUtils, ItemImportModal, ColorChooserModal,live, lang) {
 	function BackgroundProvider(opts) {
 		var backgrounds = opts.backgrounds;
 		var editorModel = opts.editorModel;
@@ -21,9 +22,13 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 		this._setBackground = this._setBackground.bind(this);
 		this._view.$el.on('mouseover', '.thumbnail', this._previewBackground);
 		this._view.$el.on('mouseout', '.thumbnail', this._restoreBackground);
-		this._view.$el.on('click', '.thumbnail', this._setBackground);
-
+		this._view.$el.on('click', '.thumbnail', this._setBackground)
+		if(this._attr === 'Background')
+			live.subscribe('background:change',this._syncBackground,this);
+		else
+			live.subscribe('surface:change',this._syncBackground,this);
 		this._setBackgroundImage = this._setBackgroundImage.bind(this);
+
 	}
 
 	var imageChooserModal = ItemImportModal.get({
@@ -67,8 +72,11 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 		},
 
 		_setBackground: function(e) {
+
 			var bg = e.currentTarget.dataset['class'];
 			var allSlides = $(e.currentTarget).parent().parent().is('.allSlides');
+			var attr = this._attr.substring(0,1).toLowerCase() + this._attr.substring(1);
+
 			if (bg == 'bg-img') {
 				var self = this;
 				imageChooserModal.show(function(src) {
@@ -83,8 +91,32 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 				});
 				return;
 			}
-
+			debugger;
+			if(!allSlides){
+				var slide = this._editorModel.activeSlide();
+				if(slide){
+					
+					live.setBackground(false,bg,attr,slide.get('__uid'));
+				}
+			}
+			else{
+				live.setBackground(true,bg,attr,null);	
+			}
+			
 			this._setBgClass(allSlides, bg);
+		},
+
+		_syncBackground:function(allSlides,bg,attr,slide){
+
+
+			if (bg == null)
+				return;
+
+			if(allSlides)
+				this._setBgClass(allSlides,bg);
+			else if(slide){
+				slide.set(attr, bg);	
+			}
 		},
 
 		_setCustomBgColor: function(allSlides, color) {
@@ -92,11 +124,11 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 			this._setBgClass(allSlides, bgClass);
 		},
 
-		_setBgClass: function(allSlides, bg) {
+		_setBgClass: function(allSlides, bg,attr) {
 			if (bg == null)
 				return;
 
-			var attr = this._attr.substring(0,1).toLowerCase() + this._attr.substring(1);
+			attr = attr || this._attr.substring(0,1).toLowerCase() + this._attr.substring(1);
 			var obj = this._pickObj(allSlides);
 
 			if (bg == '')

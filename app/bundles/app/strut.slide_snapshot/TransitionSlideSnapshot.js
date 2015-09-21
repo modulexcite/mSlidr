@@ -3,7 +3,7 @@
  */
 define(["strut/slide_components/view/ThreeDRotatableComponentView",
 	"./SlideDrawer",
-	"css!styles/transition_editor/TransitionSlideSnapshot.css",
+	"css!/styles/transition_editor/TransitionSlideSnapshot.css",
 	"strut/deck/Utils"],
 	function(ThreeDComponentView, SlideDrawer, empty, DeckUtils) {
 		var overviewSize = window.config.slide.overviewSize;

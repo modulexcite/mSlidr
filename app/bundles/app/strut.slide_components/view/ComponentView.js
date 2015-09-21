@@ -1,7 +1,7 @@
 define(["libs/backbone",
 	"tantaman/web/widgets/DeltaDragControl",
 	"common/Math2",
-	"css!styles/slide_components/ComponentView.css",
+	"css!/styles/slide_components/ComponentView.css",
 	"strut/editor/GlobalEvents",
 	"strut/deck/ComponentCommands",
 	"tantaman/web/undo_support/CmdListFactory",

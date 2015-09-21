@@ -39,6 +39,12 @@ define(["libs/backbone",
 			/**
 			 * Initialize slide model.
 			 */
+
+			 set: function(attributes, options) {    
+			    // 'strip out some extra spaces, and ensure http is prepended' here
+			    SpatialObject.prototype.set.call(this, attributes, options);
+			   
+			}, 
 			initialize: function() {
 				var components, hydratedComps;
 				components = this.get("components");
@@ -64,11 +70,12 @@ define(["libs/backbone",
 				this.on('change:markdown', this._contentsChanged, this);
 
 				components = this.get('components');
-				components.forEach(function(comp) {
-					if (comp.get('selected')) {
-						this._selectionChanged(comp, true, { multiselect: true });
-					}
-				}, this);
+				if(components)
+					components.forEach(function(comp) {
+						if (comp.get('selected')) {
+							this._selectionChanged(comp, true, { multiselect: true });
+						}
+					}, this);
 			},
 
 			/**

@@ -16,12 +16,32 @@
 }
 
 
+.profile {
+  bottom: 10px;
+  right: 60px;
+  background: #fff;
+  border: 1px solid #e7eaec;
+  width: 230px;
+  height: 160px;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 20px;
+  right: 60px;
+  z-index: 100;
+}
+
+
+
 .messanger {
-    width:150px;
+  width:150px;
+  height:150px;
 	position: absolute;
 	background-image: url('img/linen-gray.png');
 	z-index:4;
+  float:right;
 }
+
+
 
 
 #user {
@@ -350,7 +370,7 @@
 .rightdiv .bottom a,.rightdiv .bottom a:link,.rightdiv .bottom a:visited,.rightdiv .bottom a:hover,.rightdiv .bottom a:active{
 	color:#B8C2CB;text-decoration:none;
 }
-.user-image{background:url('../images/userprofile_bg.png') no-repeat;width:42px; height:53px;margin:8px 5px;}
+.user-image{background:url('../img/userprofile_bg.png') no-repeat;width:42px; height:53px;margin:8px 5px;}
 .board-name{-moz-transform:rotate(90deg);-moz-transform-origin: right;-webkit-transform: rotate(90deg);-webkit-transform-origin-x: right;font-size: 22px; color:#E3E6E9;letter-spacing:1px;width:auto;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;height: 26px; background-color: #CEE1EC; position:absolute; top:30px; right:27px}
 .thumbnailText .success{color:#10B832;}
 .thumbnailText .error{color:red;}
@@ -358,7 +378,7 @@
 .menu-holder:hover{background-color:#036bd5;border-top: 1px groove #000000;color:#FFFFFF;}
 .m-label{font-size:11px;}
 .m-selected{background-color:#036bd5;}
-.m-icon{background:url('../images/white_menu_24.png') no-repeat;width:28px;height:28px;background-position:0 0;margin:3px auto 0;}
+.m-icon{background:url('../img/white_menu_24.png') no-repeat;width:28px;height:28px;background-position:0 0;margin:3px auto 0;}
 .m-save{background-position:0 0;}
 .m-edit{background-position:0 -54px;}
 .m-view{background-position:0 -106px;}

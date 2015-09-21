@@ -1,6 +1,6 @@
 define(['libs/backbone',
 		'./LogoModel',
-		'css!styles/logo_button/logo.css'],
+		'css!/styles/logo_button/logo.css'],
 function(Backbone, LogoModel) {
 	'use strict';
 	return Backbone.View.extend({

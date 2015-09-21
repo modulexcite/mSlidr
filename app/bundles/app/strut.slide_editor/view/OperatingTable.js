@@ -1,5 +1,5 @@
 define(['libs/backbone',
-		'css!styles/slide_editor/operatingTable.css',
+		'css!/styles/slide_editor/operatingTable.css',
 		'strut/slide_components/ComponentFactory',
 		'strut/editor/GlobalEvents',
 		'strut/deck/Component',
@@ -23,6 +23,7 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 		},
 
 		initialize: function() {
+			debugger;
 			this._resize = this._resize.bind(this);
 			$(window).resize(this._resize);
 
@@ -40,12 +41,9 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 			GlobalEvents.on('delete', this._delete, this);
 
 			this._clipboard = this._editorModel.clipboard;
-
-			// ContextMenu.setModel(this._menuModel);
 		},
 
 		render: function() {
-			debugger;
 			this._$slideContainer = $('<div class="slideContainer"></div>')
 			this.$el.html(this._$slideContainer);
 			this._$slideContainer.css(config.slide.size);
@@ -220,10 +218,11 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 
 			if (this.model != null) {
 				var components = this.model.get('components');
-				components.forEach(function(comp) {
-					var view = ComponentFactory.instance.createView(comp);
-					this._$slideContainer.append(view.render());
-				}, this);
+				if(components)
+					components.forEach(function(comp) {
+						var view = ComponentFactory.instance.createView(comp);
+						this._$slideContainer.append(view.render());
+					}, this);
 
 				this._renderMarkdown();
 			}

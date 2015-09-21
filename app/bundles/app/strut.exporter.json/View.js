@@ -79,8 +79,8 @@ function(Backbone, FileUtils, lang) {
 					    onError: function(){ 
 					      alert('Error exporting'); 
 					    },
-					    swf: 'preview_export/download_assist/downloadify.swf',
-					    downloadImage: 'preview_export/download_assist/download.png',
+					    swf: '/preview_export/download_assist/downloadify.swf',
+					    downloadImage: '/preview_export/download_assist/download.png',
 					    width: 100,
 					    height: 30,
 					    transparent: false,

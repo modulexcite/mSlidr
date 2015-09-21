@@ -1,4 +1,5 @@
 define(['libs/backbone',
+	'lodash',
 	'strut/header/model/HeaderModel',
 	'strut/deck/Deck',
 	'strut/slide_components/ComponentFactory',
@@ -7,7 +8,7 @@ define(['libs/backbone',
 	'./GlobalEvents',
 	'tantaman/web/undo_support/CmdListFactory',
 	'strut/sync/collaborate'],
-	function(Backbone, Header, Deck, ComponentFactory, Adapter, Clipboard, GlobalEvents, CmdListFactory,live) {
+	function(Backbone,_, Header, Deck, ComponentFactory, Adapter, Clipboard, GlobalEvents, CmdListFactory,live) {
 		'use strict';
 
 		function adaptStorageInterfaceForSavers(storageInterface) {
@@ -26,7 +27,8 @@ define(['libs/backbone',
 				this._deck.on('change:customBackgrounds', function(deck, bgs) {
 					this.trigger('change:customBackgrounds', this, bgs)
 				}, this);
-				this.addSlide();
+				//REMOVED: we don't add empty slide anymore.
+				//this.addSlide();
 
 				this.set('header', new Header(this.registry, this));
 
@@ -52,16 +54,34 @@ define(['libs/backbone',
 				this._createMode();
 
 				this._cmdList = CmdListFactory.managedInstance('editor');
+
 				GlobalEvents.on('undo', this._cmdList.undo, this._cmdList);
 				GlobalEvents.on('redo', this._cmdList.redo, this._cmdList);
+
+				live.subscribe('deck:init',this.loadDeck,this);
 				live.subscribe('slide:create',this.insertSlide,this); 
 				live.subscribe('slide:delete',this.removeSlide,this);
-				live.subscribe('text:create',this.insertComponent,this); 
-				live.subscribe('text:delete',this.deleteComponent,this); 
-				live.subscribe('text:update',this.updateComponent,this); 
+				live.subscribe('component:create',this.insertComponent,this); 
+				live.subscribe('component:delete',this.deleteComponent,this); 
+				live.subscribe('component:update',this.updateComponent,this); 
 				Backbone.on('etch:state', this._fontStateChanged, this);
+				//load deck from the server side. 
+				live.loadDeck(); 
 			},
 
+			loadDeck : function(deck){
+				var self = this; 
+				_.each(deck.slides,function(slide){
+					var components = slide.components; 
+					if(slide.components){
+						slide.components = [];
+					}
+					self.insertSlide(slide);
+					_.each(components,function(component){
+						self.insertComponent(component);
+					})
+				})
+			}, 
 			changeActiveMode: function(modeId) {
 				if (modeId != this.get('modeId')) {
 					this.set('modeId', modeId);
@@ -156,7 +176,7 @@ define(['libs/backbone',
 			},
 
 			insertSlide:function(slide){
-			
+				
 				this._deck.insert(slide);
 			},
 			removeSlide:function(slide){
@@ -172,7 +192,7 @@ define(['libs/backbone',
 			},
 
 			insertComponent:function(component){
-				debugger;
+				
 				var slideId = component.slideId; 
 				var slide = this.slides().get(slideId); 
 				//here we should create the componenet in slient. and add it to the slide. 
@@ -187,7 +207,7 @@ define(['libs/backbone',
 
 			},
 			deleteComponent:function(component){
-				debugger;
+				
 				var slideId = component.get('slideId'); 
 				var slide = this.slides().get(slideId); 
 				slide.remove(component); 
@@ -198,7 +218,7 @@ define(['libs/backbone',
 			}, 
 			addComponent: function(type) {
 				var slide = this._deck.get('activeSlide');
-				debugger;
+				
 				if (slide) {
 					var comp = ComponentFactory.instance.createModel(type, {
 						fontStyles: this._fontState

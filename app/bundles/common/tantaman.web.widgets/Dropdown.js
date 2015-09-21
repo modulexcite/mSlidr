@@ -1,4 +1,4 @@
-define(['libs/backbone','css!styles/widgets/widgets.css'],
+define(['libs/backbone','css!/styles/widgets/widgets.css'],
 function(Backbone, empty) {
 
 	/**

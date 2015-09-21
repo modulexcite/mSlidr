@@ -1,4 +1,4 @@
-define(['css!styles/strut.themes/backgroundClasses.css'], function() {
+define(['css!/styles/strut.themes/backgroundClasses.css'], function() {
 	return {
 	title: 'background',
 	backgrounds: [

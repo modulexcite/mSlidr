@@ -107,7 +107,7 @@
           this.imagesDir.file(fileName, this.canvas.toDataURL().replace(/^data:image\/(png|jpg);base64,/, ""), {
             base64: true
           });
-          return component.set("src", "preview_export/images/" + fileName);
+          return component.set("src", "/preview_export/images/" + fileName);
         }
       };
 

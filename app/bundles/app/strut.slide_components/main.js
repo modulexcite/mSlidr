@@ -30,6 +30,7 @@ define(['./view/ComponentButton',
 			 ShapeCollection,
 			 ShapeView,
 			 Shape) {
+		debugger;
 		var availableShapes = new ShapeCollection();
 		var service = {
 			createButtons: function(editorModel) {

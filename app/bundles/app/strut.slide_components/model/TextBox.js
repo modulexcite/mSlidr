@@ -22,7 +22,6 @@ define(['strut/deck/Component'],
 		 * @augments Component
 		 */
 		return Component.extend({
-			url:'/text',
 			initialize: function() {
 				Component.prototype.initialize.apply(this, arguments);
 				this.set('type', 'TextBox');

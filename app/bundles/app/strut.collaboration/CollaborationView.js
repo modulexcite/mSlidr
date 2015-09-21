@@ -1,13 +1,16 @@
 define(['libs/backbone',
 	'strut/messaging/MessangerView',
+	'strut/collaboration/ProfileView',
 	'strut/sync/collaborate',
-	'css!styles/messanger/messanger.css'],
-function(Backbone,MessangerView,live) {
+	'css!/styles/messanger/messanger.css'],
+function(Backbone,MessangerView,ProfileView, live) {
 	return Backbone.View.extend({
 		className: 'collaboraionPanel',
 		tagName :'div',
 		events:{
-			"click #discussicon":"toggleMessanger"
+			"click #discussicon":"toggleMessanger", 
+			"click #profile":"toggleProfile", 
+
 		},
 
 		initialize: function() {
@@ -27,6 +30,7 @@ function(Backbone,MessangerView,live) {
 		constructor: function CollaborationView() {
 			this.chatIsHiddee = true; 
 			this._messanger = new MessangerView(); 
+			this._profile = new ProfileView(); 
 			Backbone.View.prototype.constructor.apply(this, arguments);
 		},
 		connected:function(myname){
@@ -36,7 +40,7 @@ function(Backbone,MessangerView,live) {
 			//alert(username); 
 		}, 
 		removeUser:function(){
-			alert('remove user'); 
+			
 		}, 
 		addMessage:function(message){
 			if(this.chatIsHiddee){
@@ -48,6 +52,10 @@ function(Backbone,MessangerView,live) {
 			
 			this._messanger.addMessage(message);
 		}, 
+
+		toggleProfile:function(){
+			this._profile.toggle(); 
+		},
 		toggleMessanger:function(){
 			this.chatIsHiddee = !this.chatIsHiddee; 
 			this._messanger.toggle(); 

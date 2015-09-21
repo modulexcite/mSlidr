@@ -1,4 +1,4 @@
-define(['css!styles/strut.themes/surfaceClasses.css'], function() {
+define(['css!/styles/strut.themes/surfaceClasses.css'], function() {
 	return {
 		title: 'surface',
 		backgrounds: [

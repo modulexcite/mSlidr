@@ -51,7 +51,7 @@ define(['lodash'],function(_) {
 		 * @param {Object} rawModel
 		 * @param {Object} opts - additional options
 		 * @returns {Component}
-		 */
+		 */  
 		createModel: function(rawModel, opts,props) {
 			// TODO: temporary hack until
 			// everyone migrates to the new serialization format
@@ -66,7 +66,7 @@ define(['lodash'],function(_) {
 			}
 			var ctor = this._modelCtors[type];
 			if (ctor) {
-
+				//some ctor functions needs slideId and others need the rawmodel itself. 
 				return new ctor(_.extend(rawModel,props), opts);
 			}
 		},

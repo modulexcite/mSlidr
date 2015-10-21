@@ -53,6 +53,10 @@ function(socketio,_,Backbone) {
 			window.socket.emit('deck:'+attr,{allSlides:allSlides, bg:bg, attr:attr, objectId:objectId}); 
 		}
 
+		this.changeName = function(userName){
+			window.socket.emit('user:change-name' , {name:userName});
+		}
+
 
 		this.connect= function(url){
 
@@ -65,6 +69,10 @@ function(socketio,_,Backbone) {
 			window.socket.on('user:yourname',function(res){
 				singlton.watcher.trigger('user:yourname',res); 
 			}); 
+
+			window.socket.on('user:name-change',function(res){
+				singlton.watcher.trigger('user:name-change',res.data); 
+			});
 
 		
 			window.socket.on('deck:init',function(res){

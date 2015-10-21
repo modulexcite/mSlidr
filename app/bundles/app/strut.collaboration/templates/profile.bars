@@ -1,1 +1,4 @@
-this is a user profile. for now it will just change the user name. 
+<div class="form-group">
+	<label>Your Name</label>
+	<input id="txt-username" type="text" value="{{username}}"> </input>
+</div>

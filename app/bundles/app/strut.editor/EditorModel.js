@@ -217,10 +217,12 @@ define(['libs/backbone',
 				
 			}, 
 			addComponent: function(type) {
+
 				var slide = this._deck.get('activeSlide');
 				
 				if (slide) {
 					var comp = ComponentFactory.instance.createModel(type, {
+						slideId:slide.get('id'),
 						fontStyles: this._fontState
 					},
 					{

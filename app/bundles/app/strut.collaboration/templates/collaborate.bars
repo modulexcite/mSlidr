@@ -7,10 +7,10 @@
     <div class="bottom">
 
       <div id="profile" class="menu-holder ">
-        <div class="m-edit"></div>
-        <div class="m-label ">Profile</div>
-        <div class="m-submenu-list">
-            <div id="profileContainer" class="profile"></div>
+        <div class="m-icon m-edit"></div>
+        <div class="m-label ">Settings</div>
+        <div id="profileContainer">
+            
         </div>
       </div>    
 
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="menu-holder m-popover" data-action="showImage" id="showCanvas">
-            <div class="m-icon m-save"></div>
+            <div class="m-icon"></div>
             <div class="m-label">Canvas</div>
             <div class="m-submenu-list" style="display: none;">
                 <span class="menu-arrow"></span>
@@ -76,6 +76,7 @@
       </div> -->
         <div class="menu-holder m-popover" id="shareicon" data-action="share" data-content="Share..." title="Share">
             <div class="icon-white icon-share-alt icon-white"></div>
+            <div class="m-icon m-share"></div>
             <div class="m-label">Share ...</div>
             <div class="m-submenu-list share-feature">
                 <!--<span class="menu-arrow"></span>-->

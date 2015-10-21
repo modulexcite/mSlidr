@@ -43,7 +43,7 @@ define(['common/Calcium',
 			constructor: function SpatialObject() {
 				Calcium.Model.prototype.constructor.apply(this, arguments);
 				//if silence object provided then don't add object to the space
-				live.addObject(this); 
+				live.addObject(this,arguments); 
 
 			},
 

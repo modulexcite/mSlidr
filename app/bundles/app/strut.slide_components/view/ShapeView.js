@@ -31,6 +31,7 @@ function(ComponentView, Mixers, ManagedColorChooser) {
 		// TODO: update markup on model so fills get preserved?
 		// Or maintain outer node here?
 		render: function() {
+			debugger;
 			ComponentView.prototype.render.call(this);
 			var obj = this.model.get('markup')
 			this.$object = $(obj);

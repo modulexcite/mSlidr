@@ -8,13 +8,12 @@ define(['libs/backbone',
 function(Backbone,live,moment,_,BaseModalView) {
 	return BaseModalView.extend({
 		events:{
-			'click #btn-close': 'close', 
-			'click #btn-save': 'changeName', 
+			'click #btn-close': 'close'
 		}, 
 
 		initialize: function() {
 			BaseModalView.prototype.initialize.apply(this,arguments); 
-			this._profileTemplate = JST['strut.collaboration/profile'];
+			this._shareTemplate = JST['strut.collaboration/share'];
 			this.rendered = false;
 			this.modalView = null; 
 		},
@@ -23,26 +22,19 @@ function(Backbone,live,moment,_,BaseModalView) {
 			BaseModalView.prototype.render.apply(this,arguments);
 		},
 		toggle:function(){
-			BaseModalView.prototype.render.call(this,{title:"Profile",username:this.username}); 
-			this.renderView(this._profileTemplate , {username:this.username}); 
+			BaseModalView.prototype.render.call(this,{title:"Share"}); 
+			this.renderView(this._shareTemplate , {
+				link: window.location.href , 
+				embededUrl:"<iframe src='" +  window.location.href + "'' width=600 height=400></iframe>"
+			}); 
+			this.$('#btn-save').hide();
 			this.show();
 		},
 		close:function(){
 			BaseModalView.prototype.teardown.apply(this, arguments);
 		}, 
 
-		changeName:function(){
-			var userName = this.$("#txt-username").val(); 
-			live.changeName(userName);
-		},
-
-		setName:function(user){
-			debugger;
-			this.username = user.name; 
-			this.userId = user.id; 
-		},
-
-		constructor: function ProfileView() {
+		constructor: function ShareView() {
 			BaseModalView.prototype.constructor.apply(this, arguments);
 		}
 	});

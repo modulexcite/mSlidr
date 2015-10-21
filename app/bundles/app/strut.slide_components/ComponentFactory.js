@@ -52,7 +52,7 @@ define(['lodash'],function(_) {
 		 * @param {Object} opts - additional options
 		 * @returns {Component}
 		 */
-		createModel: function(rawModel, opts, props) {
+		createModel: function(rawModel, opts,props) {
 			// TODO: temporary hack until
 			// everyone migrates to the new serialization format
 			if (rawModel.type == "ImageModel") {
@@ -66,7 +66,8 @@ define(['lodash'],function(_) {
 			}
 			var ctor = this._modelCtors[type];
 			if (ctor) {
-				return new ctor(props, opts);
+
+				return new ctor(_.extend(rawModel,props), opts);
 			}
 		},
 

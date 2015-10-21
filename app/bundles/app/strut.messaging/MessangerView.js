@@ -40,18 +40,20 @@ function(Backbone,live,moment,_) {
 			this.messagesBuffer = []; 
 			Backbone.View.prototype.constructor.apply(this, arguments);
 		},
-		setName:function(username){
-			this.username = username; 
+		setName:function(user){
+			debugger;
+			this.user = user; 
+			this.username = user.name; 
+			this.$('#div-username').text(this.username);
 		}, 
 		changeMyName:function(){
 			var newUserName = this.$('lbl-username').val(); 
-			
 		}, 
 		onKeyUp:function(e){
 			if(e.which === 13){ // enter key{
 				var messageTxt = this.$('#txtMessage').val(); 
 				this.addMessage({
-					username:'You', 
+					user: {name: 'You'}, 
 					createdAt:new Date(), 
 					text:messageTxt,
 					className:'right'
@@ -88,7 +90,7 @@ function(Backbone,live,moment,_) {
 			else{
 				var shouldScroll = this.shouldScroll(); 
 				this.$('.content').append(this._messageTemplate({
-					username:message.username, 
+					username:message.user.name, 
 					createdAt:moment(message.createdAt).format('h:mm a') ,
 					text:message.text,
 					className:message.className?message.className:'left'
@@ -107,10 +109,7 @@ function(Backbone,live,moment,_) {
 				_.each(this.messagesBuffer,function(message){
 					self.addMessage(message);
 				})
-				
-
 			}
-				
 			else{
 				$(this.el).hide();
 				this.hidden = true; 

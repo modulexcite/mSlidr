@@ -13,8 +13,9 @@ function(Backbone,live,moment,_,BaseModalView) {
 		}, 
 
 		initialize: function() {
+			this.friends = []; 
 			BaseModalView.prototype.initialize.apply(this,arguments); 
-			this._profileTemplate = JST['strut.collaboration/profile'];
+			this._friendsTemplate = JST['strut.collaboration/friends'];
 			this.rendered = false;
 			this.modalView = null; 
 		},
@@ -23,23 +24,31 @@ function(Backbone,live,moment,_,BaseModalView) {
 			BaseModalView.prototype.render.apply(this,arguments);
 		},
 		toggle:function(){
-			BaseModalView.prototype.render.call(this,{title:"Profile",username:this.username}); 
-			this.renderView(this._profileTemplate , {username:this.username}); 
+			BaseModalView.prototype.render.call(this,{title:"Friends"}); 
+			debugger;
+			this.renderView(this._friendsTemplate, {friends:this.friends}); 
 			this.show();
 		},
 		close:function(){
 			BaseModalView.prototype.teardown.apply(this, arguments);
-		}, 
-
-		changeName:function(){
-			var userName = this.$("#txt-username").val(); 
-			live.changeName(userName);
 		},
 
-		setName:function(user){
-			debugger;
-			this.username = user.name; 
-			this.userId = user.id; 
+		add:function(user){
+			this.friends.push(user); 
+			//render more friend
+		}, 
+
+		remove:function(user){
+			delete this.friends[user.id]; 
+			//render again.
+		}, 
+		update:function(user){
+			var index = _.findIndex(this.friends, function(friend) {
+			  return friend.id == user.id;
+			});
+			if(index>-1)
+				this.friends[index] = user; 
+			//render again. 
 		},
 
 		constructor: function ProfileView() {

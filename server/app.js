@@ -51,20 +51,23 @@ function addAppListners(nsp,socket,room){
           socket.broadcast.to(room).emit('deck:surface',background); 
         })
 
-        console.log('new connection');
         var guestName = getNewGuestName(); 
-        socket.username = guestName; 
-        deck.users.push(guestName); 
-        socket.emit('user:yourname', guestName); 
-
-
-
-        socket.broadcast.to(room).emit('user:join', {name:guestName}); 
+        socket.profile  = { name:guestName , id:guestName } ; 
+        deck.users[socket.profile.name] = socket.profile; 
+       
+        socket.emit('user:yourname', socket.profile); 
+        socket.broadcast.to(room).emit('user:join', socket.profile); 
 
         socket.on('user:message',function(message){ 
             //TODO: add it to server side
-            socket.broadcast.to(room).emit('user:message',{success:true, data:{username:socket.username, text:message, createdAt:new Date()}});
+            socket.broadcast.to(room).emit('user:message',{success:true, data:{user:socket.profile, text:message, createdAt:new Date()}});
         });
+        socket.on('user:change-name',function(data){
+
+          socket.profile.name = data.name;
+           socket.emit('user:yourname',socket.profile);
+          socket.broadcast.to(room).emit('user:name-change',{success:true,data:socket.profile}); 
+        })
 
 
         socket.on('slide:create',function(slide){ 
@@ -97,6 +100,7 @@ function addAppListners(nsp,socket,room){
         
 
         socket.on('component:create',function(component){ 
+          console.log('component' , component);
           
             component.id = counter++;
            

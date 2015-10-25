@@ -75,7 +75,6 @@
         </div>
       </div> -->
         <div class="menu-holder m-popover" id="shareicon" data-action="share" data-content="Share..." title="Share">
-            <div class="icon-white icon-share-alt icon-white"></div>
             <div class="m-icon m-share"></div>
             <div class="m-label">Share ...</div>
             <div class="m-submenu-list share-feature">

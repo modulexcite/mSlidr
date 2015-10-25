@@ -23,7 +23,7 @@ define(['strut/deck/Slide'], function(Slide) {
 		name: 'Add Slide',
 
 		"do": function() {
-			this.deck._doAdd(this.slides, {preserveIndexes: false, at: this.index});
+			this.deck._doAdd(this.slides, {preserveIndexes: true, at: this.index});
 		},
 
 		undo: function() {

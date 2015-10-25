@@ -371,8 +371,11 @@ define(["common/Calcium",
 			},
 
 			insert:function(slideAtts){
-
-				this.get('slides').add(new Slide(slideAtts),{at: slideAtts.index || this.get('slides').length}); 
+				var slide = new Slide(slideAtts);  
+				var options={}; 
+				options.at = slide.get('index') || null; 
+				//this.get('slides').add(slide); 
+				this._doAdd(slide,options); 
 			},
 
 			deleteSlide:function(slide){
@@ -390,22 +393,29 @@ define(["common/Calcium",
 			 * @private
 			 */
 			_doAdd: function(slides, options) {
+				debugger;
 				var allSlides = this.get("slides");
-
-				slides = slides || [new Slide()];
-				slides = _.isArray(slides) ? slides : [slides];
-				options = options || {};
-
 				if (!options.preserveIndexes && this.selected.length) {
 					var lastSelectedSlideIndex = allSlides.indexOf(this.selected[this.selected.length - 1]);
 				}
+				options = options || {};
+				slides = slides || [new Slide()];
+				slides = _.isArray(slides) ? slides : [slides];
+				
+
+				
 
 				for (var i = 0; i < slides.length; i++) {
 					var slide = slides[i];
 					slide.on('unrender', slide.unrendered, slide);
 					options.at = _.isNumber(options.at) ? (options.at + i) : (options.preserveIndexes ? slide.get("index") : lastSelectedSlideIndex + 1 + i) || 0;
 					slide.index= options.at; 
+					slide.set('index',options.at);
 					allSlides.add(slide, options);
+					if(!slide.get('id')){
+						live.addObject(slide)
+					}
+						
 				}
 				this.selectSlides(slides);
 			},

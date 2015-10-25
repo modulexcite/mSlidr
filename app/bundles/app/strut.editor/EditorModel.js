@@ -16,7 +16,7 @@ define(['libs/backbone',
 				store: 'savePresentation'
 			});
 		}
-
+		
 		return Backbone.Model.extend({
 			initialize: function() {
 				// is there a better way to do this?
@@ -73,13 +73,10 @@ define(['libs/backbone',
 				var self = this; 
 				_.each(deck.slides,function(slide){
 					var components = slide.components; 
-					if(slide.components){
+					if(!slide.components){
 						slide.components = [];
 					}
 					self.insertSlide(slide);
-					_.each(components,function(component){
-						self.insertComponent(component);
-					})
 				})
 			}, 
 			changeActiveMode: function(modeId) {
@@ -119,7 +116,7 @@ define(['libs/backbone',
 
 			/**
 			 * see Deck.addCustomBgClassFor
-			 */
+			*/
 			addCustomBgClassFor: function(color) {
 				var result = this._deck.addCustomBgClassFor(color);
 				if (!result.existed) {
@@ -172,11 +169,12 @@ define(['libs/backbone',
 			},
 
 			addSlide: function(index) {
+				debugger;
 				this._deck.create(index);
 			},
 
 			insertSlide:function(slide){
-				
+				debugger;
 				this._deck.insert(slide);
 			},
 			removeSlide:function(slide){

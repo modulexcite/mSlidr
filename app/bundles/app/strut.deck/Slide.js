@@ -4,12 +4,13 @@
  */
 define(["libs/backbone",
 	"./SpatialObject",
+	'lodash',
 	"strut/slide_components/ComponentFactory",
 	"common/Math2", "./ComponentCommands",
 	'tantaman/web/undo_support/CmdListFactory',
 	"strut/editor/GlobalEvents", 
 	"strut/sync/collaborate"],
-	function(Backbone, SpatialObject, ComponentFactory, Math2, ComponentCommands, CmdListFactory, key,live) {
+	function(Backbone, SpatialObject,_, ComponentFactory, Math2, ComponentCommands, CmdListFactory, key,live) {
 		var undoHistory = CmdListFactory.managedInstance('editor');
 		var defaults;
 
@@ -53,17 +54,22 @@ define(["libs/backbone",
 				} else {
 					hydratedComps = [];
 					this.set("components", hydratedComps);
-					components.forEach(function(rawComp) {
+					var self = this; 
+					_.each(components , function(rawComp) {
 						var comp;
 						if (rawComp instanceof Backbone.Model) {
 							comp = rawComp.clone();
 							hydratedComps.push(comp);
 						} else {
-							comp = ComponentFactory.instance.createModel(rawComp);
-							hydratedComps.push(comp);
+							if(rawComp.__uid){
+								comp = ComponentFactory.instance.createModel(rawComp);
+								hydratedComps.push(comp);	
+							}
+							
 						}
-						return this._registerWithComponent(comp);
-					}, this);
+						if(comp)
+							return self._registerWithComponent(comp);
+					});
 				}
 				_.defaults(this.attributes, defaults);
 				this.on("unrender", this.unrendered, this);

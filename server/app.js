@@ -8,7 +8,7 @@
 	-
 */
 var randomString = require('randomstring'); 
-var counter = 0;// this is will be replaces with mongoose  
+var counter = 1;// this is will be replaces with mongoose  
 var prefix = 'Guest_'; 
 
 //TODO: we need a data structure save the presentation for later use. 
@@ -38,6 +38,7 @@ function addAppListners(nsp,socket,room){
         var deck = decks[room]; 
         
         socket.on('deck:load',function(){
+          console.log('deck', deck);
           socket.emit('deck:init',deck); 
         });
 
@@ -73,11 +74,9 @@ function addAppListners(nsp,socket,room){
         socket.on('slide:create',function(slide){ 
             slide.id = counter++;
             deck.slides[slide.id] = slide; 
+            slide.components = {}; 
             socket.emit('slide:create',{success:true, data:slide}); 
             nsp.to(room).emit('slide:create',{success:true, data:slide});
-
-
-            console.log(deck);
         });
 
         socket.on('slide:update',function(slide){ 
@@ -137,7 +136,7 @@ function setupDynamicRooms(io){
                 slides:{
                   
                 },
-                users:[]
+                users:{}
              }
           }
           else{

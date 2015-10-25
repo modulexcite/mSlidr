@@ -1,6 +1,7 @@
 define(['strut/deck/Component',
+	'strut/sync/collaborate',
 	'common/FileUtils'],
-	function(Component, FileUtils) {
+	function(Component,live, FileUtils) {
 		'use strict';
 
 		/**
@@ -25,6 +26,7 @@ define(['strut/deck/Component',
 
 			constructor: function ImageModel(attrs) {
 				Component.prototype.constructor.call(this, attrs);
+				live.addObject(this,arguments); 
 			}
 		});
 	});

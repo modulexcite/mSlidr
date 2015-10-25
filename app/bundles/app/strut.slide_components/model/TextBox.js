@@ -1,5 +1,5 @@
-define(['strut/deck/Component'],
-	function(Component) {
+define(['strut/deck/Component','strut/sync/collaborate'],
+	function(Component,live) {
 		'use strict';
 
 		function getInitialText(attrs) {
@@ -39,6 +39,7 @@ define(['strut/deck/Component'],
 			constructor: function TextBox(attrs, opts) {
 				this._opts = opts;
 				Component.prototype.constructor.call(this, attrs);
+				live.addObject(this,arguments); 
 			}
 		});
 	});

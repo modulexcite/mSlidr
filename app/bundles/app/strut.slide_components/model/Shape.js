@@ -1,5 +1,5 @@
-define(['strut/deck/Component'],
-function(Component) {
+define(['strut/deck/Component','strut/sync/collaborate'],
+function(Component,live) {
 	'use strict';
 
 	return Component.extend({
@@ -10,6 +10,7 @@ function(Component) {
 
 		constructor: function Shape(attrs) {
 			Component.prototype.constructor.call(this, attrs);
+			live.addObject(this,arguments); 
 		}
 	});
 });

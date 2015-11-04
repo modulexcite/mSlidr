@@ -1,4 +1,0 @@
-<div class="form-group">
-	<label>Your Name</label>
-	<input id="txt-username" type="text" value="{{username}}"> </input>
-</div>

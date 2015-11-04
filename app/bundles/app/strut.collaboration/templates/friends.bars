@@ -1,5 +1,0 @@
- {{#each friends}}
-            <div class="span-12">
-            	{{name}}
-            </div>
- {{/each}}

@@ -83,7 +83,7 @@ module.exports = function (grunt) {
         },
         connect: {
             options: {
-                port: 9000,
+                port: 9005,
                 hostname: '*',
                 onCreateServer: function(server, connect, options) {
                    require('./server/app.js').start(server,connect,options)
